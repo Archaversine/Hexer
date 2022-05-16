@@ -74,8 +74,12 @@ are **CASE SENSITIVE**.
 ## Color Codes
 
 ![#ff0000](img/colors/ff0000.png): An inserted value that matches the search criteria.
+
 ![#ff00ff](img/colors/ff00ff.png): An overridden value that matches the search criteria.
+
 ![#ffff00](img/colors/ffff00.png): A value that matches the search criteria.
+
 ![#00ff00](img/colors/00ff00.png): An inserted value.
+
 ![#0000ff](img/colors/0000ff.png): An overridden value.
 
