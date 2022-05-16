@@ -386,7 +386,7 @@ std::ostream& operator<<(std::ostream& os, const HexFile& hf)
                 continue;
             }
 
-            if (c % 2 == 1) { os << DIM; } // Alternating colors
+            if (j % 2 == 1) { os << DIM; } // Alternating colors
 
             os << hf._bytes[c++] << " ";
         }
