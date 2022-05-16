@@ -144,33 +144,27 @@ int main(int argc, char** argv)
         {
             disableRawMode();
 
-            int c;
-            int temp;
+            std::string temp;
+            std::cout << " >> (APPEND-C) - Enter new values: ";
+            std::getline(std::cin, temp);
+            std::istringstream iss(temp);
 
-            std::cout << " >> (APPEND-C) - Enter number of values: ";
-            std::cin >> c;
-
-            for (int i = 0; i < c; ++i)
+            while (std::getline(iss, temp, ' '))
             {
-                update();
-                std::cout << " >> (APPEND-C) [" << i + 1 << "] - Enter new value: ";
-                std::cin >> std::hex >> temp >> std::dec;
-
                 int sel = f->SelectionAsInt();
-
                 if (sel == -1) { break; }
 
                 if (sel < f->Bytes() - 1)
                 {
-                    f->insert(sel + 1, temp);
-                    f->selectNext();
-                    continue;
+                    f->insert(sel + 1, (unsigned char) strtol(temp.c_str(), NULL, 16));
                 }
                 else
                 {
-                    f->push_back(temp);
-                    f->selectNext();
+                    std::cout << "PUSH\n";
+                    f->push_back((unsigned char) strtol(temp.c_str(), NULL, 16));
                 }
+
+                f->selectNext();
             }
 
             std::cout << "\033[2J"; // fast clear

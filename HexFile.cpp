@@ -147,7 +147,7 @@ void HexFile::select(const int pos)
 
 void HexFile::selectNext()
 {
-    if (_selection == _bytes.size() - 1 || _selection == -1) { return; }
+    if (_selection == _bytes.size() - 1) { return; }
     if (_selection != -1) { _bytes[_selection].invert = ""; }
 
     _bytes[++_selection].invert = INVERT;
