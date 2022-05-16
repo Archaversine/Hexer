@@ -74,9 +74,15 @@ are **CASE SENSITIVE**.
 ## Color Codes
 
 ![#ff0000](https://via.placeholder.com/15/ff0000?text=+): An inserted value that matches the search criteria.
+
 ![#ff00ff](https://via.placeholder.com/15/ff00ff?text=+): An overridden value that matches the search criteria.
+
 ![#ffff00](https://via.placeholder.com/15/ffff00?text=+): A value that matches the search criteria.
+
 ![#00ff00](https://via.placeholder.com/15/00ff00?text=+): An inserted value.
+
 ![#0000ff](https://via.placeholder.com/15/0000ff?text=+): An overridden value.
+
+
 
 
