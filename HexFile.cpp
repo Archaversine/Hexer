@@ -111,6 +111,11 @@ void HexFile::_scroll_if_needed()
     }
 }
 
+void HexFile::_update_highlight()
+{
+    if (_highlight_state) { highlightAll(_last_highlight); }
+}
+
 void HexFile::autoSizeRows()
 {
     rows = _bytes.size() / cols + (_bytes.size() % cols != 0);
@@ -176,6 +181,20 @@ void HexFile::selectNextRow()
     _scroll_if_needed();
 }
 
+void HexFile::selectNextHighlight()
+{
+    if (!_highlight_state || _selection == -1 || _selection >= _bytes.size() - 1) { return; }
+
+    for (int i = _selection + 1; i < _bytes.size(); ++i)
+    {
+        if (_bytes[i].value == _last_highlight)
+        {
+            select(i);
+            return;
+        }
+    }
+}
+
 void HexFile::selectPrev()
 {
     if (_selection <= 0) { return; }
@@ -202,16 +221,63 @@ void HexFile::selectPrevRow()
     _scroll_if_needed();
 }
 
+void HexFile::selectPrevHighlight()
+{
+    if (!_highlight_state || _selection <= 0) { return; }
+
+    for (int i = _selection - 1; i >= 0; --i)
+    {
+        if (_bytes[i].value == _last_highlight)
+        {
+            select(i);
+            return;
+        }
+    }
+}
+
 void HexFile::deselect()
 {
     if (_selection != -1) { _bytes[_selection].invert = ""; }
     _selection = -1;
 }
 
+void HexFile::highlightAll(const unsigned char value)
+{
+    // white -> yellow
+    // blue -> magenta
+    // green -> red
+    unhighlightAll();
+
+    _highlight_state = true;
+    _last_highlight = value;
+
+    for (HexFileByte& b : _bytes)
+    {
+        if (b.value != value) { continue; }
+
+        if (!strcmp(b.prefix, "")) { b.prefix = YELLOW; }
+        else if (!strcmp(b.prefix, BLUE)) { b.prefix = MAGENTA; }
+        else if (!strcmp(b.prefix, GREEN)) { b.prefix = RED; }
+    }
+}
+
+void HexFile::unhighlightAll()
+{
+    _highlight_state = false;
+
+    for (HexFileByte& b : _bytes)
+    {
+        if (!strcmp(b.prefix, YELLOW)) { b.prefix = ""; }
+        else if (!strcmp(b.prefix, MAGENTA)) { b.prefix = BLUE; }
+        else if (!strcmp(b.prefix, RED)) { b.prefix = GREEN; }
+    }
+}
+
 void HexFile::set(const int pos, const unsigned char value)
 {
     _bytes[pos].value = value;
     _bytes[pos].prefix = BLUE;
+    _update_highlight();
 }
 
 void HexFile::setCurrent(const unsigned char value)
@@ -220,18 +286,21 @@ void HexFile::setCurrent(const unsigned char value)
 
     _bytes[_selection].value = value;
     _bytes[_selection].prefix = BLUE;
+    _update_highlight();
 }
 
 void HexFile::insert(const unsigned char value)
 {
     if (_selection == -1 || _selection >= _bytes.size()) { return; }
     _bytes.insert(_bytes.begin() + _selection, {value, GREEN, ""});
+    _update_highlight();
     selectNext();
 }
 
 void HexFile::insert(const int pos, const unsigned char value)
 {
     _bytes.insert(_bytes.begin() + pos, {value, GREEN, ""});
+    _update_highlight();
     if (_selection >= pos) { selectNext(); }
 }
 
@@ -243,6 +312,8 @@ void HexFile::insertc(const unsigned char* values, const int c)
         _bytes.insert(_bytes.begin() + _selection + i, {values[i], GREEN, ""});
         selectNext();
     }
+
+    _update_highlight();
 }
 
 void HexFile::insertc(const int pos, const unsigned char* values, const int c)
@@ -252,12 +323,15 @@ void HexFile::insertc(const int pos, const unsigned char* values, const int c)
         _bytes.insert(_bytes.begin() + pos + i, {values[i], GREEN, ""});
         if (_selection >= pos) { selectNext(); }
     }
+
+    _update_highlight();
 }
 
 void HexFile::del()
 {
     if (_selection == -1 || _selection >= _bytes.size() || _bytes.size() <= 1) { return; }
     _bytes.erase(_bytes.begin() + _selection, _bytes.begin() + _selection + 1);
+    _update_highlight();
 
     if (_selection == -1 || _selection >= _bytes.size())
     {
@@ -273,6 +347,7 @@ void HexFile::del(const int pos)
 {
     if (_bytes.size() <= 1) { return; }
     _bytes.erase(_bytes.begin() + pos, _bytes.begin() + pos + 1);
+    _update_highlight();
 }
 
 void HexFile::delc(const int c)
@@ -281,6 +356,7 @@ void HexFile::delc(const int c)
     {
         if (_selection == -1 || _selection + i >= _bytes.size() || _bytes.size() <= 1) { return; }
         _bytes.erase(_bytes.begin() + _selection, _bytes.begin() + _selection + c);
+        _update_highlight();
 
         if (_selection == -1 || _selection + i >= _bytes.size())
         {
@@ -296,17 +372,20 @@ void HexFile::delc(const int c)
 void HexFile::delc(const int pos, const int c)
 {
     _bytes.erase(_bytes.begin() + pos, _bytes.begin() + pos + c);
+    _update_highlight();
     if (_bytes.empty()) { _bytes.push_back({0, "", ""}); }
 }
 
 void HexFile::push_back(const unsigned char value)
 {
     _bytes.push_back({value, GREEN, ""});
+    _update_highlight();
 }
 
 void HexFile::push_front(const unsigned char value)
 {
     _bytes.insert(_bytes.begin(), {value, GREEN, ""});
+    _update_highlight();
     selectNext();
 }
 

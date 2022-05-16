@@ -31,7 +31,7 @@ The following are the keybindings to use Hexer. Movement of the cursor is contro
 both the arrow keys and the VIM (HJKL) keys. Also note that the following keybindings
 are **CASE SENSITIVE**.
 
-Use the arrow keys or HJKL to navigate the cursor.
+### Editing Keybinds
 
 `r` - \[r]eplace the selected value at the cursor's position with a new value.
 
@@ -49,9 +49,21 @@ Use the arrow keys or HJKL to navigate the cursor.
 
 `X` - Delete multiple values starting at the cursor's position.
 
+### Navigating Keybinds
+
 `g` - \[g]o to the byte at the specified offset (offset is in hexadecimal).
 
 `G` - \[G]o to the last byte in the file.
+
+`/` - Search for and highlight all occurences of a specified byte.
+
+`K` - Turn off highlighting.
+
+`n` - Go to the \[n]ext highlighted byte.
+
+`N` - Go to the previous highlighted byte.
+
+### File Keybinds
 
 `W` - \[W]rite all changes to a specified file.
 

@@ -211,7 +211,29 @@ int main(int argc, char** argv)
             f->select(f->Bytes() - 1);
             update();
             break;
-
+        case '/': // Find byte
+        {
+            disableRawMode();
+            int temp;
+            std::cout << "Find: ";
+            std::cin >> std::hex >> temp >> std::dec;
+            f->highlightAll((unsigned char) temp);
+            enableRawMode();
+            update();
+            break;
+        }
+        case 'K': // Turn off highlighting
+            f->unhighlightAll();
+            update();
+            break;
+        case 'n': // Goto next highlighted byte
+            f->selectNextHighlight();
+            update();
+            break;
+        case 'N': // Goto previous highlighted byte
+            f->selectPrevHighlight();
+            update();
+            break;
         case 'W': // Write to file
         {
             disableRawMode();

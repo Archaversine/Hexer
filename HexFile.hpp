@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include <string.h>
 
 #include "Color.hpp"
 
@@ -30,9 +31,14 @@ private:
     std::vector<HexFileByte> _bytes;
 
     int _selection = -1;
+
+    unsigned char _last_highlight;
+    bool _highlight_state = false;
     
     bool _valid_pos(const int pos);
     void _scroll_if_needed();
+
+    void _update_highlight();
 
 public:
     int rows = 10;
@@ -54,9 +60,14 @@ public:
     void select(const int pos);
     void selectNext();
     void selectNextRow();
+    void selectNextHighlight();
     void selectPrev();
     void selectPrevRow();
+    void selectPrevHighlight();
     void deselect();
+
+    void highlightAll(const unsigned char value);
+    void unhighlightAll();
 
     void set(const int pos, const unsigned char value);
     void setCurrent(const unsigned char value);
