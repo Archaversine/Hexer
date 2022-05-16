@@ -156,8 +156,15 @@ void HexFile::selectNext()
 
 void HexFile::selectNextRow()
 {
-    if (_selection >= _bytes.size() - cols || _selection == -1) { return; }
+    if (_selection == -1) { return; }
     if (_selection != -1) { _bytes[_selection].invert = ""; }
+
+    if (_selection >= _bytes.size() - cols)
+    {
+        _selection = _bytes.size() - 1;
+        _bytes[_selection].invert = INVERT;
+        return;
+    }
 
     _selection += cols;
     _bytes[_selection].invert = INVERT;
@@ -175,8 +182,15 @@ void HexFile::selectPrev()
 
 void HexFile::selectPrevRow()
 {
-    if (_selection < cols || _selection == -1) { return; }
+    if (_selection <= 0) { return; }
     if (_selection != -1) { _bytes[_selection].invert = ""; }
+
+    if (_selection < cols)
+    {
+        _selection = 0;
+        _bytes[_selection].invert = INVERT;
+        return;
+    }
 
     _selection -= cols;
     _bytes[_selection].invert = INVERT;
