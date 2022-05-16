@@ -48,3 +48,5 @@ Use the arrow keys or HJKL to navigate the cursor.
 `g` - \[G]o to the byte at the specified offset (offset is in hexadecimal).
 
 `w` - \[W]rite all changes to a specified file.
+
+`q` - \[Q]uit the editor (NOTE: DOES **NOT** ASK TO SAVE BEFORE QUITTING).
