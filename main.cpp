@@ -17,7 +17,7 @@ void update();
 
 HexFile* f;
 
-std::string fName;
+char* fName;
 
 int main(int argc, char** argv)
 {
@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     f->cols = (width - 19) / 4;
     f->select(0);
 
-    fName = f->Filename;
+    fName = argv[1];
 
     char c;
     enableRawMode();
