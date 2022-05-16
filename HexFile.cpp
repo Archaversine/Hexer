@@ -308,7 +308,7 @@ void HexFile::putSelDetails(std::ostream& out) const
     if (_selection == -1 || _selection >= _bytes.size()) { return; }
 
     out << "Selection (0x";
-    out << std::setw(8) << std::setfill('0') << std::hex;
+    out << std::right << std::setw(8) << std::setfill('0') << std::hex;
     
     if (_selection == 0) { out << 0; }
     else
@@ -319,7 +319,7 @@ void HexFile::putSelDetails(std::ostream& out) const
     int value = (int) *Selection();
 
     out << "): [HEX: ";
-    out << std::right << std::setw(2) << std::setfill('0') << std::hex;
+    out << std::setw(2) << std::setfill('0') << std::hex;
     out << value << "], [DEC: " << std::dec << value << "], [OCT: ";
     out << std::oct << value << "], [BIN: ";
     out << std::bitset<8>(value) << "] ";
@@ -358,6 +358,8 @@ std::ostream& operator<<(std::ostream& os, const HexFile& hf)
     };
 
     horzLine();
+
+    os << std::right;
 
     for (int i = hf.rowOffset; i < hf.rowOffset + hf.maxRows; ++i)
     {
