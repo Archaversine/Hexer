@@ -207,6 +207,10 @@ int main(int argc, char** argv)
             update();
             break;
         }
+        case 'G': // Goto end EOF
+            f->select(f->Bytes() - 1);
+            update();
+            break;
 
         case 'w': // Write to file
         {

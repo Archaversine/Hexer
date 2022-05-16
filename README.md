@@ -51,6 +51,8 @@ Use the arrow keys or HJKL to navigate the cursor.
 
 `g` - \[g]o to the byte at the specified offset (offset is in hexadecimal).
 
+`G` - \[G]o to the last byte in the file.
+
 `w` - \[w]rite all changes to a specified file.
 
 `O` - \[O]pen a different file (Does not create new files).
