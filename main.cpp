@@ -140,7 +140,7 @@ int main(int argc, char** argv)
             update();
             break;
         }
-        case 'A': // Append multiple values // TODO: Change this to match syntax of other commands
+        case 'A': // Append multiple values
         {
             disableRawMode();
 
