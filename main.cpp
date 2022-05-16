@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     getWinDims(width, height);
 
     f = new HexFile(argv[1]);
-    f->maxRows = height - 6;
+    f->maxRows = height - 7;
     f->cols = (width - 19) / 4;
     f->select(0);
 
@@ -258,7 +258,7 @@ int main(int argc, char** argv)
 
             delete f;
             f = new HexFile(temp);
-            f->maxRows = height - 6;
+            f->maxRows = height - 7;
             f->cols = (width - 19) / 4;
             f->select(0);
 
