@@ -60,6 +60,7 @@ int main(int argc, char** argv)
             std::cout << " >> (REPLACE) - Enter new value: ";
             std::cin >> std::hex >> temp >> std::dec;
             f->setCurrent((unsigned char) temp);
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -91,6 +92,7 @@ int main(int argc, char** argv)
             std::cout << " >> (INSERT) - Enter new value: ";
             std::cin >> std::hex >> temp >> std::dec;
             f->insert(temp);
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -129,6 +131,7 @@ int main(int argc, char** argv)
             {
                 f->insert(sel + 1, temp);
                 f->selectNext();
+                std::cout << "\033[2J"; // fast clear
                 enableRawMode();
                 update();
                 break;
@@ -136,6 +139,7 @@ int main(int argc, char** argv)
 
             f->push_back(temp);
             f->selectNext();
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -190,6 +194,7 @@ int main(int argc, char** argv)
                 f->del();
             }
 
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -203,6 +208,7 @@ int main(int argc, char** argv)
             std::cin >> std::hex >> pos >> std::dec;
 
             f->select(pos);
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -218,6 +224,7 @@ int main(int argc, char** argv)
             std::cout << "Find: ";
             std::cin >> std::hex >> temp >> std::dec;
             f->highlightAll((unsigned char) temp);
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -241,6 +248,7 @@ int main(int argc, char** argv)
             std::cout << "Enter file to write to: ";
             std::cin >> temp;
             f->writeTo(temp);
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -264,6 +272,7 @@ int main(int argc, char** argv)
 
             fName = temp.c_str();
 
+            std::cout << "\033[2J"; // fast clear
             enableRawMode();
             update();
             break;
@@ -318,9 +327,6 @@ int main(int argc, char** argv)
                 update();
                 break;
             }
-        default:
-            std::cout << "FILENAME: " << f->Filename << '\n';
-            update();
         }
     }
 
