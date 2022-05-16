@@ -3,7 +3,7 @@ CLI Hex Editor for Linux in C++
 
 ## Example
 
-![Hexer in Use](https://github.com/Archaversine/Hexer/img/sample-use.png)
+![Hexer in Use](https://raw.githubusercontent.com/Archaversine/Hexer/main/img/sample-use.png)
 
 ## Installation
 
@@ -29,13 +29,22 @@ hexer file.txt
 
 Use the arrow keys or HJKL to navigate the cursor.
 
-`r` - \[R]eplace the selected value at the cursor's position with a new value.\n
-`R` - \[R]eplace multiple values starting at the cursor's position.\n
-`i` - \[I]nsert a new value before the cursor's position.\n
-`I` - \[I]nsert multiple values before the cursor's position.\n
-`a` - \[A]ppend a value after the cursor's position.\n
-`A` - \[A]ppend multiple values after the corsor's position.\n
-`x` - \[D]elete the selected value.\n
-`X` - \[D]elete multiple values starting at the cursor's position.\n
-`g` - \[G]o to the byte at the specified offset (offset is in hexadecimal).\n
-`w` - \[W]rite all changes to a specified file.\n
+`r` - \[R]eplace the selected value at the cursor's position with a new value.
+
+`R` - \[R]eplace multiple values starting at the cursor's position.
+
+`i` - \[I]nsert a new value before the cursor's position.
+
+`I` - \[I]nsert multiple values before the cursor's position.
+
+`a` - \[A]ppend a value after the cursor's position.
+
+`A` - \[A]ppend multiple values after the corsor's position.
+
+`x` - \[D]elete the selected value.
+
+`X` - \[D]elete multiple values starting at the cursor's position.
+
+`g` - \[G]o to the byte at the specified offset (offset is in hexadecimal).
+
+`w` - \[W]rite all changes to a specified file.
