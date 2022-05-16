@@ -53,7 +53,7 @@ Use the arrow keys or HJKL to navigate the cursor.
 
 `G` - \[G]o to the last byte in the file.
 
-`w` - \[w]rite all changes to a specified file.
+`W` - \[W]rite all changes to a specified file.
 
 `O` - \[O]pen a different file (Does not create new files).
 

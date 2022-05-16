@@ -212,7 +212,7 @@ int main(int argc, char** argv)
             update();
             break;
 
-        case 'w': // Write to file
+        case 'W': // Write to file
         {
             disableRawMode();
             std::string temp;
