@@ -82,6 +82,11 @@ HexFile::HexFile(const std::string& filename) : Filename(filename)
         _bytes.push_back({temp, "", ""});
     }       
 
+    if (_bytes.empty())
+    {
+        _bytes.push_back({0, "", ""});
+    }
+
     _in.close();
     autoSizeRows();
 }
@@ -159,7 +164,7 @@ void HexFile::selectNextRow()
     if (_selection == -1) { return; }
     if (_selection != -1) { _bytes[_selection].invert = ""; }
 
-    if (_selection >= _bytes.size() - cols)
+    if (_selection >= (int) _bytes.size() - cols)
     {
         _selection = _bytes.size() - 1;
         _bytes[_selection].invert = INVERT;
@@ -251,7 +256,7 @@ void HexFile::insertc(const int pos, const unsigned char* values, const int c)
 
 void HexFile::del()
 {
-    if (_selection == -1 || _selection >= _bytes.size()) { return; }
+    if (_selection == -1 || _selection >= _bytes.size() || _bytes.size() <= 1) { return; }
     _bytes.erase(_bytes.begin() + _selection, _bytes.begin() + _selection + 1);
 
     if (_selection == -1 || _selection >= _bytes.size())
@@ -266,6 +271,7 @@ void HexFile::del()
 
 void HexFile::del(const int pos)
 {
+    if (_bytes.size() <= 1) { return; }
     _bytes.erase(_bytes.begin() + pos, _bytes.begin() + pos + 1);
 }
 
@@ -273,7 +279,7 @@ void HexFile::delc(const int c)
 {
     for (int i = 0; i < c; ++i)
     {
-        if (_selection == -1 || _selection + i >= _bytes.size()) { return; }
+        if (_selection == -1 || _selection + i >= _bytes.size() || _bytes.size() <= 1) { return; }
         _bytes.erase(_bytes.begin() + _selection, _bytes.begin() + _selection + c);
 
         if (_selection == -1 || _selection + i >= _bytes.size())
@@ -290,6 +296,7 @@ void HexFile::delc(const int c)
 void HexFile::delc(const int pos, const int c)
 {
     _bytes.erase(_bytes.begin() + pos, _bytes.begin() + pos + c);
+    if (_bytes.empty()) { _bytes.push_back({0, "", ""}); }
 }
 
 void HexFile::push_back(const unsigned char value)
@@ -363,7 +370,7 @@ std::ostream& operator<<(std::ostream& os, const HexFile& hf)
 
     for (int i = hf.rowOffset; i < hf.rowOffset + hf.maxRows; ++i)
     {
-        if (i >= hf._bytes.size()) { break; }
+        //if (i >= hf._bytes.size()) { break; }
 
         int temp = c;
 
@@ -373,7 +380,7 @@ std::ostream& operator<<(std::ostream& os, const HexFile& hf)
 
         for (int j = 0; j < hf.cols; ++j)
         {
-            if (c == hf._bytes.size())
+            if (c >= hf._bytes.size())
             {
                 os << DIM << "-- " << RESET;
                 continue;
