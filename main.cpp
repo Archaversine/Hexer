@@ -17,7 +17,7 @@ void update();
 
 HexFile* f;
 
-char* fName;
+const char* fName;
 
 int main(int argc, char** argv)
 {
@@ -219,6 +219,29 @@ int main(int argc, char** argv)
             update();
             break;
         }
+        case 'O': // Open new file
+        {
+            disableRawMode();
+            std::string temp;
+            std::cout << "Enter file to open: ";
+            std::cin >> temp;
+
+            int width = 0;
+            int height = 0;
+            getWinDims(width, height);
+
+            delete f;
+            f = new HexFile(temp);
+            f->maxRows = height - 6;
+            f->cols = (width - 19) / 4;
+            f->select(0);
+
+            fName = temp.c_str();
+
+            enableRawMode();
+            update();
+            break;
+        }
 
         // CURSOR NAVIGATION
 
@@ -277,6 +300,7 @@ int main(int argc, char** argv)
 
     std::cout << "\033[2J\033[H"; // clear screen
 
+    delete f;
     return 0;
 }
 

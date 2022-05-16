@@ -27,26 +27,32 @@ hexer file.txt
 
 ## Keybindings:
 
+The following are the keybindings to use Hexer. Movement of the cursor is controlled by
+both the arrow keys and the VIM (HJKL) keys. Also note that the following keybindings
+are **CASE SENSITIVE**.
+
 Use the arrow keys or HJKL to navigate the cursor.
 
-`r` - \[R]eplace the selected value at the cursor's position with a new value.
+`r` - \[r]eplace the selected value at the cursor's position with a new value.
 
 `R` - \[R]eplace multiple values starting at the cursor's position.
 
-`i` - \[I]nsert a new value before the cursor's position.
+`i` - \[i]nsert a new value before the cursor's position.
 
 `I` - \[I]nsert multiple values before the cursor's position.
 
-`a` - \[A]ppend a value after the cursor's position.
+`a` - \[a]ppend a value after the cursor's position.
 
 `A` - \[A]ppend multiple values after the corsor's position.
 
-`x` - \[D]elete the selected value.
+`x` - Delete the selected value.
 
-`X` - \[D]elete multiple values starting at the cursor's position.
+`X` - Delete multiple values starting at the cursor's position.
 
-`g` - \[G]o to the byte at the specified offset (offset is in hexadecimal).
+`g` - \[g]o to the byte at the specified offset (offset is in hexadecimal).
 
-`w` - \[W]rite all changes to a specified file.
+`w` - \[w]rite all changes to a specified file.
 
-`q` - \[Q]uit the editor (NOTE: DOES **NOT** ASK TO SAVE BEFORE QUITTING).
+`O` - \[O]pen a different file (Does not create new files).
+
+`q` - \[q]uit the editor (NOTE: DOES **NOT** ASK TO SAVE BEFORE QUITTING).
